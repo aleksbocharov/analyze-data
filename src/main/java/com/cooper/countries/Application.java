@@ -47,6 +47,6 @@ public class Application {
                 .filter(e->e.getAdultLiteracyRate()!=null)
                 .max(Comparator.comparing(Country::getAdultLiteracyRate))
                 .orElse(null).getAdultLiteracyRate();
-        
+
     }
 }
