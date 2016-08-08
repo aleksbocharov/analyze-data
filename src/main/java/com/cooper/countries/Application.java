@@ -42,7 +42,6 @@ public class Application {
     }
 
     private static Double maxInternetUsers(List<Country> countries){
-
         return countries.stream()
                 .filter(e->e.getAdultLiteracyRate()!=null)
                 .max(Comparator.comparing(Country::getAdultLiteracyRate))
