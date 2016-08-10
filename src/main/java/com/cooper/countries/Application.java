@@ -7,8 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -27,7 +25,8 @@ public class Application {
         System.out.printf(format,"Country","Inet users", "Literacy");
         System.out.println("--------------------------------------------------------");
 //        getCountries().forEach(System.out::println);
-        System.out.println("maximum literacy: " + maxInternetUsers(getCountries()));
+        System.out.println("maximum literacy: " + maxLiteracy(getCountries()));
+        System.out.println("maximum internet users: " + maxInternetUsers(getCountries()));
     }
 
     @SuppressWarnings("unchecked")
@@ -42,6 +41,13 @@ public class Application {
     }
 
     private static Double maxInternetUsers(List<Country> countries){
+        return countries.stream()
+                .filter(e-> e.getInternetUsers()!=null)
+                .max(Comparator.comparing(Country::getInternetUsers))
+                .orElse(null).getInternetUsers();
+    }
+
+    private static Double maxLiteracy(List<Country> countries){
         return countries.stream()
                 .filter(e->e.getAdultLiteracyRate()!=null)
                 .max(Comparator.comparing(Country::getAdultLiteracyRate))
